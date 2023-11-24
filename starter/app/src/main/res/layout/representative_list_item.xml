@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="representative"
+            type="com.example.android.politicalpreparedness.representative.model.Representative" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding">
+
+
+        <ImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:profileImage="@{representative.official.photoUrl}"
+            app:srcCompat="@drawable/ic_profile" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{representative.office.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{representative.official.name}"
+            app:layout_constraintEnd_toStartOf="@+id/icon"
+            app:layout_constraintStart_toEndOf="@+id/image_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/party"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{representative.official.party}"
+            app:layout_constraintEnd_toStartOf="@+id/icon"
+            app:layout_constraintStart_toEndOf="@+id/image_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/social_item_size"
+            android:layout_height="@dimen/social_item_size"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/website_description"
+            app:layout_constraintEnd_toStartOf="@+id/facebookIcon"
+            app:layout_constraintTop_toTopOf="@+id/facebookIcon"
+            app:srcCompat="@drawable/ic_www" />
+
+        <ImageView
+            android:id="@+id/facebookIcon"
+            android:layout_width="@dimen/social_item_size"
+            android:layout_height="@dimen/social_item_size"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/facebook_description"
+            app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:srcCompat="@drawable/ic_facebook" />
+
+        <ImageView
+            android:id="@+id/twitterIcon"
+            android:layout_width="@dimen/social_item_size"
+            android:layout_height="@dimen/social_item_size"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/twitter_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/facebookIcon"
+            app:srcCompat="@drawable/ic_twitter" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

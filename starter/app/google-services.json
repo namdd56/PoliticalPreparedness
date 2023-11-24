@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "818235281706",
+    "project_id": "nth-victory-323618",
+    "storage_bucket": "nth-victory-323618.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818235281706:android:d52b79d408e14e3fc20e53",
+        "android_client_info": {
+          "package_name": "com.example.android.politicalpreparedness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818235281706-8k63lq6r9otpumtpglu5flgudcfsdikb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.politicalpreparedness",
+            "certificate_hash": "9db3958a0eb10ff82614d110e28ba523125c5dd3"
+          }
+        },
+        {
+          "client_id": "818235281706-e6spjmak0oqnhnkigeb522q8ka6eqvrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-Ihsxj9pBeUbPbinTB-HPgXaixvPCKjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818235281706-e6spjmak0oqnhnkigeb522q8ka6eqvrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
