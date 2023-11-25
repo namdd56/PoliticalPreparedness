@@ -35,13 +35,13 @@ class RepresentativeViewModel : ViewModel() {
             try {
                 if (address != null) {
                     _address.value = address
-                    val (offices, officials) = CivicsApi.retrofitService.getRepresentatives(_address.value?.toFormattedString()!!)
+                    var addressString = _address.value!!.toFormattedString()
+                    val (offices, officials) = CivicsApi.retrofitService.getRepresentatives(addressString)
                     _representatives.value = offices.flatMap { office ->
                         office.getRepresentatives(officials)
                     }
                 }
             } catch (e: Exception) {
-                _address.value = Address("", "", "", "", "")
                 _representatives.value = arrayListOf()
                 _errorMessage.value = "Error: ${e.message}"
             }

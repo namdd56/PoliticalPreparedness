@@ -41,7 +41,6 @@ class ElectionsViewModel(
             try {
                 val response = civicsApiService.getElections()
                 _upcomingElections.value = response.elections
-                electionDao.insert(response.elections[0])
             } catch (e: Exception) {
                 _upcomingElections.value = ArrayList()
                 _errorMessage.value = "Error: ${e.message}"

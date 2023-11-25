@@ -55,11 +55,11 @@ class DetailFragment : Fragment() {
         //TODO: Establish button listeners for field and location search
         binding.buttonSearchRepresentative.setOnClickListener {
             var address = Address(
-                binding.addressLine1.toString(),
-                binding.addressLine2.toString(),
-                binding.city.toString(),
-                binding.state.toString(),
-                binding.zip.toString()
+                binding.addressLine1.text.toString(),
+                binding.addressLine2.text.toString(),
+                binding.city.text.toString(),
+                binding.state.selectedItem.toString(),
+                binding.zip.text.toString()
             )
             viewModel.fetchRepresentatives(address)
         }
