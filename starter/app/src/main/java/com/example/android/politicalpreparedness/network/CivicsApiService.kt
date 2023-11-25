@@ -1,6 +1,5 @@
 package com.example.android.politicalpreparedness.network
 
-import com.example.android.politicalpreparedness.BuildConfig
 import com.example.android.politicalpreparedness.network.jsonadapter.DateAdapter
 import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
 import com.example.android.politicalpreparedness.network.models.ElectionResponse
@@ -9,16 +8,18 @@ import com.example.android.politicalpreparedness.network.models.VoterInfoRespons
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.serialization.json.JsonObject
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+
 private const val BASE_URL = "https://www.googleapis.com/civicinfo/v2/"
 
 // TODO: Add adapters for Java Date and custom adapter ElectionAdapter (included in project)
 private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
     .add(ElectionAdapter())
     .add(DateAdapter())
     .add(KotlinJsonAdapterFactory())
@@ -39,23 +40,23 @@ interface CivicsApiService {
     //TODO: Add elections API Call
     @GET("elections")
     suspend fun getElections(
-//        @Query("key") apiKey: String = BuildConfig.API_KEY
     ): ElectionResponse
 
     //TODO: Add voterinfo API Call
     @GET("voterinfo")
     suspend fun getVoterInfo(
         @Query("address") address: String,
-        @Query("electionId") electionId: Int
-//        @Query("key") apiKey: String = BuildConfig.API_KEY
+        @Query("electionId") electionId: Int,
     ): VoterInfoResponse
 
     //TODO: Add representatives API Call
     @GET("representatives")
     suspend fun getRepresentatives(
-        @Query("address") address: String
-//        @Query("key") apiKey: String = BuildConfig.API_KEY
+        @Query("address") address: String,
     ): RepresentativeResponse
+
+//    @GET("/")
+//    fun getString(): Call<JsonObject?>?
 }
 
 object CivicsApi {

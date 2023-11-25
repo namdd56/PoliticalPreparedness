@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.election
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,9 +41,11 @@ class ElectionsViewModel(
             try {
                 val response = civicsApiService.getElections()
                 _upcomingElections.value = response.elections
+                electionDao.insert(response.elections[0])
             } catch (e: Exception) {
                 _upcomingElections.value = ArrayList()
                 _errorMessage.value = "Error: ${e.message}"
+                Log.e("ElectionsViewModel::getUpcomingElectionsFromAPI", "Error: " + _errorMessage.value)
             }
         }
     }
@@ -53,6 +56,7 @@ class ElectionsViewModel(
                 _savedElections.value = electionDao.getAllElections()
             } catch (e: Exception) {
                 _errorMessage.value = "Error: ${e.message}"
+                Log.e("ElectionsViewModel::getSavedElectionsFromDB", "Error: " + _errorMessage.value)
             }
         }
     }

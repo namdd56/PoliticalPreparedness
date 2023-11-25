@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.election
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,13 +43,19 @@ class VoterInfoViewModel(private val dataSource: ElectionDao) : ViewModel() {
     fun populateVoterInfo(electionId: Int, division: Division) {
         viewModelScope.launch {
             try {
-                val address = "${division.state}, ${division.country}"
-                val voterInfoResponse = CivicsApi.retrofitService.getVoterInfo(address, electionId)
+                var address = ""
+                if (division.state == "") {
+                    address = " \"Alabama\", ${division.country}"
+                } else {
+                    address = "${division.state}, ${division.country}"
+                }
+
+                _address.value = address
                 _isCurrent.value = dataSource.getElection(electionId) != null
+                val voterInfoResponse = CivicsApi.retrofitService.getVoterInfo(address, electionId)
                 _election.value = voterInfoResponse.election
                 _administrationBody.value =
                     voterInfoResponse.state?.first()?.electionAdministrationBody
-                _address.value = address
             } catch (e: Exception) {
                 _errorMessage.value = "Error: ${e.message}"
             }
