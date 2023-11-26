@@ -22,8 +22,8 @@ class ElectionsViewModel(
         get() = _upcomingElections
 
     //TODO: Create live data val for saved elections
-    private val _savedElections = MutableLiveData<List<Election?>>()
-    val savedElections: LiveData<List<Election?>>
+    private val _savedElections = MutableLiveData<List<Election>>()
+    val savedElections: LiveData<List<Election>>
         get() = _savedElections
 
     private val _errorMessage = MutableLiveData<String?>()
@@ -44,7 +44,7 @@ class ElectionsViewModel(
             } catch (e: Exception) {
                 _upcomingElections.value = ArrayList()
                 _errorMessage.value = "Error: ${e.message}"
-                Log.e("ElectionsViewModel::getUpcomingElectionsFromAPI", "Error: " + _errorMessage.value)
+                Log.i("ElectionsViewModel::getUpcomingElectionsFromAPI", "Error: " + _errorMessage.value)
             }
         }
     }
@@ -55,7 +55,7 @@ class ElectionsViewModel(
                 _savedElections.value = electionDao.getAllElections()
             } catch (e: Exception) {
                 _errorMessage.value = "Error: ${e.message}"
-                Log.e("ElectionsViewModel::getSavedElectionsFromDB", "Error: " + _errorMessage.value)
+                Log.i("ElectionsViewModel::getSavedElectionsFromDB", "Error: " + _errorMessage.value)
             }
         }
     }

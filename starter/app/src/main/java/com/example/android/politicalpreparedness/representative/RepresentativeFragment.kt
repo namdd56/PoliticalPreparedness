@@ -8,6 +8,8 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -80,25 +82,45 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        //TODO: Handle location permission result to get location on permission granted
-        if (requestCode == REQUEST_ACCESS_FINE_LOCATION) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLocation()
-            } else {
-                Snackbar.make(
-                    requireView(),
-                    R.string.error_location_permission,
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+    private val locationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            // Precise location access granted.
+            getLocation()
+        } else {
+            // No location access granted.
+            Snackbar.make(
+                requireView(),
+                R.string.error_location_permission,
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
+
     }
+
+
+
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray,
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        //TODO: Handle location permission result to get location on permission granted
+//        if (requestCode == REQUEST_ACCESS_FINE_LOCATION) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                getLocation()
+//            } else {
+//                Snackbar.make(
+//                    requireView(),
+//                    R.string.error_location_permission,
+//                    Snackbar.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
+//    }
 
     @SuppressLint("MissingPermission")
     private fun checkLocationPermissions(): Boolean {
@@ -107,10 +129,8 @@ class DetailFragment : Fragment() {
             true
         } else {
             //TODO: Request Location permissions
-            this.requestPermissions(
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_ACCESS_FINE_LOCATION
-            )
+            locationPermissionLauncher.launch(
+                Manifest.permission.ACCESS_FINE_LOCATION)
             false
         }
     }

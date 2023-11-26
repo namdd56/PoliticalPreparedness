@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:padding="@dimen/padding"
-                app:listData="@{viewModel.savedElections}" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:listData="@{viewModel.savedElections}"/>
         </LinearLayout>
 
     </ScrollView>
