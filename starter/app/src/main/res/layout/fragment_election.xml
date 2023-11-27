@@ -11,54 +11,56 @@
             type="com.example.android.politicalpreparedness.election.ElectionsViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.android.politicalpreparedness.MainActivity">
+        android:orientation="vertical">
 
-
-        <LinearLayout
+        <!-- TODO: Add Upcoming Election Recycler and Header -->
+        <TextView
+            android:id="@+id/txt_upcoming_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="@dimen/padding"
+            android:text="@string/upcoming_election"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- TODO: Add Upcoming Election Recycler and Header -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding"
-                android:paddingRight="@dimen/padding"
-                android:text="@string/upcoming_election"
-                android:textAlignment="viewStart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <!-- TODO: Add Saved Election Recycler and Header -->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_elections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:padding="@dimen/padding"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.upcomingElections}" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_upcoming_elections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/txt_upcoming_title"
+            app:layout_constraintTop_toBottomOf="@id/txt_upcoming_title"
+            app:listData="@{viewModel.upcomingElections}" />
 
-            <!-- TODO: Add Saved Election Recycler and Header -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding"
-                android:paddingRight="@dimen/padding"
-                android:text="@string/saved_elections"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <TextView
+            android:id="@+id/txt_saved_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="@dimen/padding"
+            android:text="@string/saved_elections"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="@id/rv_upcoming_elections"
+            app:layout_constraintTop_toBottomOf="@id/rv_upcoming_elections" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_saved_elections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:padding="@dimen/padding"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.savedElections}"/>
-        </LinearLayout>
-
-    </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_saved_elections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/txt_saved_title"
+            app:layout_constraintTop_toBottomOf="@id/txt_saved_title"
+            app:listData="@{viewModel.savedElections}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -49,7 +49,7 @@ class ElectionsViewModel(
         }
     }
 
-    private fun getSavedElectionsFromDB() {
+     fun getSavedElectionsFromDB() {
         viewModelScope.launch {
             try {
                 _savedElections.value = electionDao.getAllElections()

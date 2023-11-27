@@ -79,6 +79,7 @@ class ElectionsFragment : Fragment() {
         // Refresh the adapter by calling notifyDataSetChanged
         upcomingElectionsAdapter.notifyDataSetChanged()
         savedElectionsAdapter.notifyDataSetChanged()
+        viewModel.getSavedElectionsFromDB()
     }
 
     private fun showSnackbar(message: String, duration: Int = Snackbar.LENGTH_LONG) {

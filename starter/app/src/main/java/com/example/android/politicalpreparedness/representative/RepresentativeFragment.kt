@@ -2,15 +2,18 @@ package com.example.android.politicalpreparedness.representative
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -64,6 +67,8 @@ class DetailFragment : Fragment() {
                 binding.zip.text.toString()
             )
             viewModel.fetchRepresentatives(address)
+
+            hideKeyboard(it)
         }
         binding.buttonLocation.setOnClickListener {
             checkLocationPermissions()
@@ -98,9 +103,6 @@ class DetailFragment : Fragment() {
         }
 
     }
-
-
-
 
 //    override fun onRequestPermissionsResult(
 //        requestCode: Int,
@@ -147,7 +149,7 @@ class DetailFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         //TODO: Get location from LocationServices
-        val location = LocationServices.getFusedLocationProviderClient(requireActivity())
+        val location = LocationServices.getFusedLocationProviderClient(requireContext())
         //TODO: The geoCodeLocation method is a helper function to change the lat/long location to a human readable street address
         location.lastLocation
             .addOnSuccessListener { location ->
@@ -159,7 +161,7 @@ class DetailFragment : Fragment() {
                 }
             }
             .addOnFailureListener { e ->
-                Log.d("Location", "Error: " + e.localizedMessage)
+                Log.i("Location", "Error: " + e.localizedMessage)
             }
     }
 
@@ -178,5 +180,10 @@ class DetailFragment : Fragment() {
             .first()
     }
 
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
 }
