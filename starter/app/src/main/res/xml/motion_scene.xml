@@ -8,33 +8,28 @@
         app:motionInterpolator="linear">
         <OnSwipe
             app:dragDirection="dragUp"
-            app:touchAnchorId="@+id/recycler_representatives" />
+            app:touchAnchorId="@+id/formToSearch" />
     </Transition>
 
     <!-- Constraints to apply at the start of the animation -->
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/recycler_representatives"
+            android:id="@+id/formToSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <Alpha android:alpha="1" />
-        </Constraint>
+            app:layout_constraintTop_toTopOf="parent"/>
     </ConstraintSet>
 
     <!-- Constraints to apply at the end of the animation -->
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/recycler_representatives"
+            android:id="@+id/formToSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <Alpha android:alpha="0" />
-        </Constraint>
-
+            app:layout_constraintStart_toStartOf="parent"/>
     </ConstraintSet>
 </MotionScene>

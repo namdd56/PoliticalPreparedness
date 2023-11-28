@@ -87,6 +87,19 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        var address = Address(
+            binding.addressLine1.text.toString(),
+            binding.addressLine2.text.toString(),
+            binding.city.text.toString(),
+            binding.state.selectedItem.toString(),
+            binding.zip.text.toString()
+        )
+        viewModel.setAddress(address)
+
+        super.onSaveInstanceState(outState)
+    }
+
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->

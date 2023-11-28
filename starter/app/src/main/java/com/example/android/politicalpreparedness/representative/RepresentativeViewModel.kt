@@ -48,6 +48,10 @@ class RepresentativeViewModel : ViewModel() {
         }
     }
 
+    fun setAddress(address: Address) {
+        _address.value = address
+    }
+
     /**
      *  The following code will prove helpful in constructing a representative from the API. This code combines the two nodes of the RepresentativeResponse into a single official :
 
